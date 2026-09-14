@@ -6,7 +6,7 @@
 - style.css - Main Stylesheet
 
 ## TODO
-- Make a favicon
+- Make a favicon-Done
 - Design Homepage
 - Set up database
 - Set up video Player
