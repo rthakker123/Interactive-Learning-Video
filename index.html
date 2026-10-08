@@ -8,6 +8,22 @@
     <title>Interactive Learning Video</title>
 </head>
 <body>
+    <main class="container">
+        <div class="video-container">
+            <video id="interactive-video" controls width="100%">
+                <!-- add source line for video file-->
+            </video>
+            <div id="interactive-overlay" class="overlay hidden">
+                <div class="overlay-content">
+                    <h2 id="question-text">Select an option to continue:</h2>
+                    <div class="choice-buttons">
+                        <button class="btn" onclick="makeChoice('choiceA')">Option A</button>
+                        <!--add option b and what ever else-->
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
     <!-- Section 1 -Title and Initial Software Details Template -->
      <!-- TODO: Replace placeholder content with actual software details -->
     <section>
@@ -18,5 +34,6 @@
             <figcaption>Image Description</figcaption>
         </figure>
     </section>
+    <script src="script.js"></script>
 </body>
 </html>
