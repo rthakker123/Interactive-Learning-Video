@@ -11,5 +11,5 @@ This is our submission for FL TSA 2026-2027 State Conference
 
 ## Plan
 
-- Homepage will be the place to make video quizzes. you will enter a video URL and your questions and once done it will encrypt in AES-256 and store in a TXT file. Then it will output a link for students to use to take the quiz.
+- We Will data in a SQL Lite database, when a teacher creates the quiz, it will give an access code so students can access the quiz.
 - Student link will rely on a embedded video to and will stop the video to display question at the write timestamp. Again will encrypt all data in AES-256 and store as txt file.
