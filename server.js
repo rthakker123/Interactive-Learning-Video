@@ -1,4 +1,4 @@
-//IMPORT TOOLS
+//Import Tools
 const express = require('express');
 const sqlite3 = require('sqlite3').verbose();
 const app = express();
@@ -9,7 +9,7 @@ app.use(express.static('.'));  // Serves your index.html, script.js, and css to 
 // creates a file named if it isn't there already.
 const db = new sqlite3.Database('./project.db');
 
-// Manually build a table inside the database file right at startup
+// Manually build the tables inside the database file right at startup
 db.serialize(() => {
     db.run(`CREATE TABLE IF NOT EXISTS questions (
         id INTEGER PRIMARY KEY, 
@@ -19,8 +19,7 @@ db.serialize(() => {
         a TEXT,
         b TEXT,
         c TEXT,
-        d TEXT,
-        optionCount INTEGER
+        d TEXT
     )`);
 
     db.run(`CREATE TABLE IF NOT EXISTS scores (
@@ -28,11 +27,11 @@ db.serialize(() => {
         name TEXT, 
         questionCount INTEGER, 
         questionsCorrect INTEGER,
-        percentage INTEGER,
+        percentage INTEGER
     )`);
 });
 
-// GET ALL QUESTIONS FOR A SPECIFIC ACCESS CODE
+// Get all questions for a specific acess code.
 app.get('/questions/getQuiz/:accessCode', (req, res) => {
     const accessCode = req.params.accessCode;
     db.all(`SELECT * FROM questions WHERE accessCode = ?`, [accessCode], (err, rows) => {
@@ -44,5 +43,20 @@ app.get('/questions/getQuiz/:accessCode', (req, res) => {
     });
 });
 
-// START SERVER
+//Add a Question to the database
+app.post('/questions/add', (req, res) => {
+  const { accessCode, timestamp, question, a, b, c, d } = req.body;
+
+  db.run(
+    `INSERT INTO questions (accessCode, timestamp, question, a, b, c, d)
+     VALUES (?, ?, ?, ?, ?, ?, ?)`,
+    [accessCode, timestamp, question, a, b, c, d],
+    function (err) {
+      if (err) return res.status(500).json({ error: err.message });
+      res.json({ id: this.lastID });
+    }
+  );
+});
+
+// Start Server
 app.listen(3000, () => console.log("Server listening at http://localhost:3000"));
