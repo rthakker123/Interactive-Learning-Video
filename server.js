@@ -1,4 +1,4 @@
-// 1. IMPORT TOOLS
+//IMPORT TOOLS
 const express = require('express');
 const sqlite3 = require('sqlite3').verbose();
 const app = express();
@@ -22,9 +22,27 @@ db.serialize(() => {
         d TEXT,
         optionCount INTEGER
     )`);
+
+    db.run(`CREATE TABLE IF NOT EXISTS scores (
+        id INTEGER PRIMARY KEY, 
+        name TEXT, 
+        questionCount INTEGER, 
+        questionsCorrect INTEGER,
+        percentage INTEGER,
+    )`);
 });
 
-
+// GET ALL QUESTIONS FOR A SPECIFIC ACCESS CODE
+app.get('/questions/getQuiz/:accessCode', (req, res) => {
+    const accessCode = req.params.accessCode;
+    db.all(`SELECT * FROM questions WHERE accessCode = ?`, [accessCode], (err, rows) => {
+        if (err) {
+            res.status(500).json({ error: err.message });
+            return;
+        }
+        res.json(rows);
+    });
+});
 
 // START SERVER
 app.listen(3000, () => console.log("Server listening at http://localhost:3000"));
