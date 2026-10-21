@@ -1,22 +1,43 @@
 const video = document.getElementById('interactive-video');
 const overlay = document.getElementById('interactive-overlay');
 const buttons = overlay.querySelectorAll('.btn');
+const questionText = document.getElementById('question-text');
 
-const triggerTime = parseFloat(overlay.dataset.triggerTime);
+//hardcoded question for testing
+const questions = [
+    {
+        time: 10,
+        text: "What is the narrator doing?",
+        choices: ["Eating", "Jumping", "Singing", "Dancing"],
+        correct: "Jumping",
+        shown: false
+    },
+    {
+        time: 45,
+        text: "What color is the sky?",
+        choices: ["blue", "red", "green", "pink"],
+        correct: "blue",
+        shown: false
+    }
+];
+        
 
 video.addEventListener('timeupdate', () =>{
-    if(Math.floor(video.currentTime) === triggerTime && !video.paused) {
-        video.pause();
-        overlay.classList.remove('hidden');
+    questions.forEach(question => {
+    if (video.currentTime >= question.time && !question.shown)
+    { question.shown = true;
+      video.pause();
+     questionText.textContent = question.text;
+      overlay.classList.remove('hidden');
     }
-})
+});
+});
 
-buttons.forEach(button => {
-    button.addEventListener('click', () => {
-        const jumpTo = parseFloat(button.dataset.jumpTo);
-        overlay.classList.add('hidden');
-        video.currentTime = jumpTo;
-        video.play();
-        
-    })
-})
+
+function makeChoice(answer) {
+    console.log("Selected:", answer);
+    overlay.classList.add('hidden');
+    video.play();
+}
+    
+                      
