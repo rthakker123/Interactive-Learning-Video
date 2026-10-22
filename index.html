@@ -10,9 +10,7 @@
 <body>
     <main class="container">
         <div class="video-container">
-            <video id="interactive-video" controls width="100%">
-                <source src="./resources/videos/examplelesson.mp4" type="video/mp4">
-            </video>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/I2wURDqiXdM?si=7iVmaTvOccvAYKfa" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             <div id="interactive-overlay" class="overlay hidden">
                 <div class="overlay-content">
                     <h2 id="question-text">What would you like to do next?</h2>
@@ -22,31 +20,7 @@
                 </div>
             </div>
         </div>
-        <section class="config-panel" style="margin-top: 25px; background: #fff; padding: 20px; border-radius: 8px; text-align: left;">
-      <h3 style="margin-top: 0;">Create Your Interactive Question</h3>
-      <p>Enter a timestamp, your question, and choice options below:</p>
-      
-      <div class="form-group" style="margin-bottom: 15px;">
-        <label for="input-time" style="display: block; margin-bottom: 5px; font-weight: bold;">Pause Video at (seconds):</label>
-        <input type="number" id="input-time" value="5" min="0" style="width: 100%; padding: 8px; box-sizing: border-box;">
-      </div>
-
-      <div class="form-group" style="margin-bottom: 15px;">
-        <label for="input-question" style="display: block; margin-bottom: 5px; font-weight: bold;">Question Text:</label>
-        <input type="text" id="input-question" placeholder="e.g., What did you just see?" value="What would you like to do next?" style="width: 100%; padding: 8px; box-sizing: border-box;">
-      </div>
-
-      <div class="form-group" style="margin-bottom: 15px;">
-        <label style="display: block; margin-bottom: 5px; font-weight: bold;">Answer Choices & Jump Times:</label>
-        <div class="choice-input-row" style="display: flex; gap: 10px; margin-bottom: 8px;">
-          <input type="text" id="choice-a-text" value="Option A" style="width: 100%; padding: 8px; box-sizing: border-box;">
-          <input type="number" id="choice-a-jump" value="10" style="width: 100%; padding: 8px; box-sizing: border-box;">
-        </div>
-        <div class="choice-input-row" style="display: flex; gap: 10px; margin-bottom: 8px;">
-          <input type="text" id="choice-b-text" value="Option B" style="width: 100%; padding: 8px; box-sizing: border-box;">
-          <input type="number" id="choice-b-jump" value="20" style="width: 100%; padding: 8px; box-sizing: border-box;">
-        </div>
-      </div>
+        
 
       <button id="save-question-btn" class="btn">Save Custom Question</button>
     </section>
