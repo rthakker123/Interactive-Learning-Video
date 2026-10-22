@@ -1,43 +1,63 @@
-const video = document.getElementById('interactive-video');
-const overlay = document.getElementById('interactive-overlay');
-const buttons = overlay.querySelectorAll('.btn');
-const questionText = document.getElementById('question-text');
+let customQuizPoint = {
+  time: 5,
+  question: "Select an option to continue:",
+  choices: [
+    { text: "Option A", jumpTo: 10 },
+    { text: "Option B", jumpTo: 20 }
+  ]
+};
 
-//hardcoded question for testing
-const questions = [
-    {
-        time: 10,
-        text: "What is the narrator doing?",
-        choices: ["Eating", "Jumping", "Singing", "Dancing"],
-        correct: "Jumping",
-        shown: false
-    },
-    {
-        time: 45,
-        text: "What color is the sky?",
-        choices: ["blue", "red", "green", "pink"],
-        correct: "blue",
-        shown: false
-    }
-];
-        
+let hasTriggered = false;
 
-video.addEventListener('timeupdate', () =>{
-    questions.forEach(question => {
-    if (video.currentTime >= question.time && !question.shown)
-    { question.shown = true;
-      video.pause();
-     questionText.textContent = question.text;
-      overlay.classList.remove('hidden');
-    }
-});
+// 1. Save user input into our quiz object when they click save
+saveBtn.addEventListener('click', () => {
+  customQuizPoint.time = parseFloat(inputTime.value) || 0;
+  customQuizPoint.question = inputQuestion.value || "Make a choice:";
+  
+  customQuizPoint.choices = [
+    { text: choiceAText.value || "Option A", jumpTo: parseFloat(choiceAJump.value) || 0 },
+    { text: choiceBText.value || "Option B", jumpTo: parseFloat(choiceBJump.value) || 0 }
+  ];
+
+  alert("Custom question saved! Play the video to test it.");
+  video.currentTime = 0; // Rewind to start
+  hasTriggered = false;
 });
 
+// 2. Watch video time and pause at the user-defined timestamp
+video.addEventListener('timeupdate', () => {
+  const currentTime = Math.floor(video.currentTime);
 
-function makeChoice(answer) {
-    console.log("Selected:", answer);
-    overlay.classList.add('hidden');
-    video.play();
-}
+  if (currentTime === customQuizPoint.time && !hasTriggered && !video.paused) {
+    hasTriggered = true;
+    showCustomOverlay(customQuizPoint);
+  }
+});
+
+// 3. Dynamically build the overlay buttons using the user's custom choices
+function showCustomOverlay(quizData) {
+  video.pause();
+  questionTextElement.innerText = quizData.question;
+  choiceButtonsContainer.innerHTML = ''; // Clear old buttons
+
+  quizData.choices.forEach(choice => {
+    const btn = document.createElement('button');
+    btn.className = 'btn';
+    btn.innerText = `${choice.text} (Jump to ${choice.jumpTo}s)`;
     
-                      
+    btn.onclick = () => {
+      overlay.classList.add('hidden');
+      video.currentTime = choice.jumpTo;
+      video.play();
+    };
+
+    choiceButtonsContainer.appendChild(btn);
+  });
+
+  overlay.classList.remove('hidden');
+}
+
+// Reset trigger if user scrubs/seeks through the video
+video.addEventListener('seeking', () => {
+  hasTriggered = false;
+});
