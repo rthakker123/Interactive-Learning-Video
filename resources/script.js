@@ -1,3 +1,17 @@
+const video = document.getElementById('interactive-video');
+const overlay = document.getElementById('interactive-overlay');
+const questionTextElement = document.getElementById('question-text');
+const choiceButtonsContainer = document.querySelector('.choice-buttons');
+
+const inputTime = document.getElementById('input-time');
+const inputQuestion = document.getElementById('input-question');
+const choiceAText = document.getElementById('choice-a-text');
+const choiceAJump = document.getElementById('choice-a-jump');
+const choiceBText = document.getElementById('choice-b-text');
+const choiceBJump = document.getElementById('choice-b-jump');
+const saveBtn = document.getElementById('save-question-btn');
+
+
 let customQuizPoint = {
   time: 5,
   question: "Select an option to continue:",
