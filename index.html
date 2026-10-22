@@ -15,30 +15,43 @@
             </video>
             <div id="interactive-overlay" class="overlay hidden">
                 <div class="overlay-content">
-                    <h2 id="question-text">Select an option to continue:</h2>
+                    <h2 id="question-text">What would you like to do next?</h2>
                     <div class="choice-buttons">
-                        <button class="btn" onclick="makeChoice('choiceA')">Option A</button>
-                        <button class="btn" onclick="makeChoice('choiceB')">Option B</button>
-                        <button class="btn" onclick="makeChoice('choiceC')">Option C</button>
-                        <button class="btn" onclick="makeChoice('choiceD')">Option D</button>
+
                     </div>
                 </div>
             </div>
         </div>
-    </main>
-    <!-- Section 1 -Title and Initial Software Details Template -->
-     <!-- TODO: Replace placeholder content with actual software details -->
-    <section>
-        <h1 class="page-title">Interactive Learning Video</h1>
-        <p class="page-description">- Insert description here -</p>
-        <figure>
-            <img class="description-image" src="https://picsum.photos/300/200" alt="Placeholder Image For example interactive moment" />
-            <figcaption>Image Description</figcaption>
-        </figure>
-        <img class="description-image"
-            src="./resources/example.jpg"
-            alt="example">
+        <section class="config-panel" style="margin-top: 25px; background: #fff; padding: 20px; border-radius: 8px; text-align: left;">
+      <h3 style="margin-top: 0;">Create Your Interactive Question</h3>
+      <p>Enter a timestamp, your question, and choice options below:</p>
+      
+      <div class="form-group" style="margin-bottom: 15px;">
+        <label for="input-time" style="display: block; margin-bottom: 5px; font-weight: bold;">Pause Video at (seconds):</label>
+        <input type="number" id="input-time" value="5" min="0" style="width: 100%; padding: 8px; box-sizing: border-box;">
+      </div>
+
+      <div class="form-group" style="margin-bottom: 15px;">
+        <label for="input-question" style="display: block; margin-bottom: 5px; font-weight: bold;">Question Text:</label>
+        <input type="text" id="input-question" placeholder="e.g., What did you just see?" value="What would you like to do next?" style="width: 100%; padding: 8px; box-sizing: border-box;">
+      </div>
+
+      <div class="form-group" style="margin-bottom: 15px;">
+        <label style="display: block; margin-bottom: 5px; font-weight: bold;">Answer Choices & Jump Times:</label>
+        <div class="choice-input-row" style="display: flex; gap: 10px; margin-bottom: 8px;">
+          <input type="text" id="choice-a-text" value="Option A" style="width: 100%; padding: 8px; box-sizing: border-box;">
+          <input type="number" id="choice-a-jump" value="10" style="width: 100%; padding: 8px; box-sizing: border-box;">
+        </div>
+        <div class="choice-input-row" style="display: flex; gap: 10px; margin-bottom: 8px;">
+          <input type="text" id="choice-b-text" value="Option B" style="width: 100%; padding: 8px; box-sizing: border-box;">
+          <input type="number" id="choice-b-jump" value="20" style="width: 100%; padding: 8px; box-sizing: border-box;">
+        </div>
+      </div>
+
+      <button id="save-question-btn" class="btn">Save Custom Question</button>
     </section>
-    <script src="./resources/script.js"></script>
+  </main>
+
+  <script src="./resources/script.js"></script>
 </body>
 </html>
