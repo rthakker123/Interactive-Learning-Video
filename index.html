@@ -13,17 +13,15 @@
             <iframe width="560" height="315" src="https://www.youtube.com/embed/I2wURDqiXdM?si=7iVmaTvOccvAYKfa" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
             <div id="interactive-overlay" class="overlay hidden">
                 <div class="overlay-content">
-                    <h2 id="question-text">What would you like to do next?</h2>
-                    <div class="choice-buttons">
-
-                    </div>
+                    <h2 id="question-text" placeholder="Enter your question here..."> </h2>
                 </div>
             </div>
         </div>
-        
-
-      <button id="save-question-btn" class="btn">Save Custom Question</button>
-    </section>
+        <div class="url-container">
+            <input type="text" id="url-input" placeholder="Enter a URL">
+            <button id="load-url-button" class="btn">Load URL</button>
+        </div>
+        </main>
   </main>
 
   <script src="./resources/script.js"></script>

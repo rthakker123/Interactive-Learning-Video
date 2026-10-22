@@ -13,3 +13,6 @@ This is our submission for FL TSA 2026-2027 State Conference
 
 - We will store data in a SQL Lite database, when a teacher creates the quiz, it will give an access code so students can access the quiz.
 - Student link will rely on a embedded video to and will stop the video to display question at the write timestamp. Again will encrypt all data in AES-256 and store as txt file.
+
+add load url functionality
+redo script and add add skeleton for adding questions

@@ -12,14 +12,7 @@ const choiceBJump = document.getElementById('choice-b-jump');
 const saveBtn = document.getElementById('save-question-btn');
 
 
-let customQuizPoint = {
-  time: 5,
-  question: "Select an option to continue:",
-  choices: [
-    { text: "Option A", jumpTo: 10 },
-    { text: "Option B", jumpTo: 20 }
-  ]
-};
+
 
 let hasTriggered = false;
 
