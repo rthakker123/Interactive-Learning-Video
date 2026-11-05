@@ -1,5 +1,6 @@
 const loadBtn = document.getElementById('load-url-button');
 const videoContainer = document.getElementById('interactive-video');
+const accessCodeDisplay = document.getElementById('access-code');
 
 loadBtn.addEventListener('click', function() {
     const pastedUrl = document.getElementById('url-input').value.trim();
@@ -22,17 +23,26 @@ loadBtn.addEventListener('click', function() {
     }
 
     if (videoId) {
-        videoContainer.innerHTML = `
-            <iframe
-                width="100%"
-                height="400"
-                src="https://www.youtube.com/embed/${videoId}"
-                title="YouTube video player"
-                allowfullscreen>
-            </iframe>
-        `;
+        videoContainer.src = "https://www.youtube.com/embed/" + videoId;
     } 
     else {
         alert("Please enter a valid YouTube URL!");
     }
+
+    fetch('/videos/create', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ videoUrl: pastedUrl })
+    })
+    .then(response => response.json())
+    .then(data => {
+        accessCodeDisplay.textContent = "Access Code: " + data.accessCode;
+    })
+    .catch(error => {
+        alert("Couldn't connect to server.");
+        console.log(error);
+    });
+    
 });
