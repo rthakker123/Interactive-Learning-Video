@@ -2,6 +2,7 @@
 const express = require('express');
 const sqlite3 = require('sqlite3').verbose();
 const app = express();
+const crypto = require('crypto');
 
 app.use(express.json());       // Allows the server to read data sent from the browser
 app.use(express.static('.'));  // Serves your index.html, script.js, and css to the browser
@@ -29,6 +30,11 @@ db.serialize(() => {
         questionsCorrect INTEGER,
         percentage INTEGER
     )`);
+
+    db.run(' CREATE TABLE IF NOT EXISTS videos (
+           accessCode TEXT PRIMARY KEY,
+        videoURL TEXT
+    )');
 });
 
 // Get all questions for a specific acess code.
@@ -57,6 +63,28 @@ app.post('/questions/add', (req, res) => {
     }
   );
 });
+
+app.post('/videos/create', (req, res) => {
+    const { videoUrl } = req.body;
+    if(!videoUrl) {
+        return res.status(400).json({ error: "Please give a video URL!!!" });
+    }
+
+    const accessCode = crypto.randomBytes(3).toString('hex').toUpperCase();
+
+    db.run{
+        'INSERT INTO videos (accessCode, videoUrl) VALUES (?, ?)',
+            [accessCode, videoUrl],
+            function (err) {
+                if (err) {
+                    return res.status(500).json({ error: err.message });
+                }
+
+                res.json({ accessCode: accessCode });
+            }
+        );
+    });
+
 
 // Start Server
 app.listen(3000, () => console.log("Server listening at http://localhost:3000"));
