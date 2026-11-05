@@ -1,23 +1,19 @@
 {
-  "name": "interatictive-learning-video",
+  "name": "interactive-learning-video",
   "version": "1.0.0",
-  "description": "This is our submission for FL TSA 2026-2027 State Conference",
-  "main": "index.js",
+  "description": "Interactive learning video project for FL TSA 2026-2027",
+  "main": "server.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "start": "node server.js",
+    "test": "echo \"No tests configured yet\""
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/rthakker123/Interatictive-Learning-Video.git"
+    "url": "git+https://github.com/rthakker123/Interactive-Learning-Video.git"
   },
-  "keywords": [],
-  "author": "",
+  "keywords": ["interactive-video", "learning", "quiz"],
   "license": "ISC",
   "type": "commonjs",
-  "bugs": {
-    "url": "https://github.com/rthakker123/Interatictive-Learning-Video/issues"
-  },
-  "homepage": "https://github.com/rthakker123/Interatictive-Learning-Video#readme",
   "dependencies": {
     "express": "^5.3.0",
     "sqlite3": "^6.0.1"
