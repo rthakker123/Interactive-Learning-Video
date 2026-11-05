@@ -72,7 +72,7 @@ app.post('/videos/create', (req, res) => {
 
     const accessCode = crypto.randomBytes(3).toString('hex').toUpperCase();
 
-    db.run{
+    db.run(
         `INSERT INTO videos (accessCode, videoUrl) VALUES (?, ?)`,
             [accessCode, videoUrl],
             function (err) {
