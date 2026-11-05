@@ -1,70 +1,33 @@
-const video = document.getElementById('interactive-video');
-const overlay = document.getElementById('interactive-overlay');
-const questionTextElement = document.getElementById('question-text');
-const choiceButtonsContainer = document.querySelector('.choice-buttons');
+const loadBtn = document.getElementById('load-url-button');
+const videoIframe = document.getElementById('interactive-video');
 
-const inputTime = document.getElementById('input-time');
-const inputQuestion = document.getElementById('input-question');
-const choiceAText = document.getElementById('choice-a-text');
-const choiceAJump = document.getElementById('choice-a-jump');
-const choiceBText = document.getElementById('choice-b-text');
-const choiceBJump = document.getElementById('choice-b-jump');
-const saveBtn = document.getElementById('save-question-btn');
+loadBtn.addEventListener('click', () => {
+    const pastedUrl = document.getElementById('url-input').value.trim();
 
+    if (!pastedUrl) {
+        alert("Please paste a URL first!");
+        return;
+    }
 
+    let videoId = "";
 
+    // Handle standard watch URLs (e.g., https://www.youtube.com/watch?v=...)
+    if (pastedUrl.includes("watch?v=")) {
+        videoId = pastedUrl.split("watch?v=")[1]?.split("&")[0];
+    } 
+    // Handle short URLs (e.g., https://youtu.be/...)
+    else if (pastedUrl.includes("youtu.be/")) {
+        videoId = pastedUrl.split("youtu.be/")[1]?.split("?")[0];
+    }
+    // Handle embed URLs
+    else if (pastedUrl.includes("/embed/")) {
+        videoId = pastedUrl.split("/embed/")[1]?.split("?")[0];
+    }
 
-let hasTriggered = false;
-
-// 1. Save user input into our quiz object when they click save
-saveBtn.addEventListener('click', () => {
-  customQuizPoint.time = parseFloat(inputTime.value) || 0;
-  customQuizPoint.question = inputQuestion.value || "Make a choice:";
-  
-  customQuizPoint.choices = [
-    { text: choiceAText.value || "Option A", jumpTo: parseFloat(choiceAJump.value) || 0 },
-    { text: choiceBText.value || "Option B", jumpTo: parseFloat(choiceBJump.value) || 0 }
-  ];
-
-  alert("Custom question saved! Play the video to test it.");
-  video.currentTime = 0; // Rewind to start
-  hasTriggered = false;
-});
-
-// 2. Watch video time and pause at the user-defined timestamp
-video.addEventListener('timeupdate', () => {
-  const currentTime = Math.floor(video.currentTime);
-
-  if (currentTime === customQuizPoint.time && !hasTriggered && !video.paused) {
-    hasTriggered = true;
-    showCustomOverlay(customQuizPoint);
-  }
-});
-
-// 3. Dynamically build the overlay buttons using the user's custom choices
-function showCustomOverlay(quizData) {
-  video.pause();
-  questionTextElement.innerText = quizData.question;
-  choiceButtonsContainer.innerHTML = ''; // Clear old buttons
-
-  quizData.choices.forEach(choice => {
-    const btn = document.createElement('button');
-    btn.className = 'btn';
-    btn.innerText = `${choice.text} (Jump to ${choice.jumpTo}s)`;
-    
-    btn.onclick = () => {
-      overlay.classList.add('hidden');
-      video.currentTime = choice.jumpTo;
-      video.play();
-    };
-
-    choiceButtonsContainer.appendChild(btn);
-  });
-
-  overlay.classList.remove('hidden');
-}
-
-// Reset trigger if user scrubs/seeks through the video
-video.addEventListener('seeking', () => {
-  hasTriggered = false;
+    if (videoId) {
+        videoIframe.src = `https://www.youtube.com/embed/${videoId}`;
+        console.log("Successfully loaded YouTube ID:", videoId);
+    } else {
+        alert("Please enter a valid YouTube URL!");
+    }
 });
