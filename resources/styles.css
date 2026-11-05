@@ -1,103 +1,146 @@
-* { box-sizing: border-box; }
 body {
-  font-family: Arial, sans-serif;
-  background: #f4f6fb;
-  color: #202533;
-  margin: 0;
-  padding: 24px 16px;
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f9;
+    color: #333;
+    margin: 0;
+    padding: 20px;
 }
-.container { max-width: 900px; margin: 0 auto; }
-.page-header { text-align: center; margin-bottom: 22px; }
-.page-header h1 { margin-bottom: 8px; }
-.page-header p, .helper { color: #5e6678; }
-.panel {
-  background: #fff;
-  border: 1px solid #e0e5ef;
-  border-radius: 12px;
-  padding: 20px;
-  margin: 18px 0;
-  box-shadow: 0 3px 12px rgba(20, 35, 70, .05);
+
+.container {
+    max-width: 850px;
+    margin: 0 auto;
 }
-label { display: block; font-weight: 600; margin: 10px 0 6px; text-align: left; }
+
+h1, h2 {
+    text-align: center;
+}
+
+.controls, .teacher-section {
+    background: white;
+    padding: 18px;
+    margin: 20px 0;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+}
+
+label {
+    display: block;
+    margin: 12px 0 6px;
+    font-weight: bold;
+}
+
 input, textarea, select {
-  width: 100%;
-  min-width: 0;
-  padding: 11px 12px;
-  border: 1px solid #cbd2df;
-  border-radius: 6px;
-  font: inherit;
-  background: #fff;
+    width: 100%;
+    padding: 9px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-family: Arial, sans-serif;
+    font-size: 15px;
+    box-sizing: border-box;
 }
-textarea { resize: vertical; }
-.url-row { display: flex; gap: 10px; align-items: center; }
-.url-row input { flex: 1; }
-.access-row { margin-top: 12px; }
-.access-row label { margin: 0; white-space: nowrap; }
+
+.url-row {
+    display: flex;
+    gap: 10px;
+}
+
+.url-row input {
+    flex: 1;
+}
+
 .btn {
-  padding: 11px 17px;
-  font-size: 15px;
-  cursor: pointer;
-  border: 0;
-  background: #1769d2;
-  color: #fff;
-  border-radius: 6px;
-  font-weight: 600;
+    padding: 10px 16px;
+    border: none;
+    border-radius: 5px;
+    background-color: #007bff;
+    color: white;
+    font-size: 15px;
+    cursor: pointer;
 }
-.btn:hover { background: #1055ae; }
-.btn.secondary { background: #475569; }
-.btn:disabled { opacity: .6; cursor: not-allowed; }
-.status { margin: 12px 0 0; color: #475569; }
-.error { color: #b42318 !important; }
+
+.btn:hover {
+    background-color: #0056b3;
+}
+
+#status-message, #teacher-status {
+    color: #555;
+}
+
 .video-container {
-  position: relative;
-  width: 100%;
-  aspect-ratio: 16 / 9;
-  background: #000;
-  border-radius: 10px;
-  overflow: hidden;
+    position: relative;
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    background: black;
+    overflow: hidden;
+    border-radius: 8px;
 }
-#interactive-video, #interactive-video iframe { width: 100%; height: 100%; }
+
+#interactive-video, #interactive-video iframe {
+    width: 100%;
+    height: 100%;
+}
+
 .overlay {
-  position: absolute;
-  inset: 0;
-  background: rgba(8, 13, 25, .94);
-  color: #fff;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 10;
-  padding: 20px;
-  overflow-y: auto;
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.9);
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    overflow-y: auto;
 }
-.hidden { display: none !important; }
-.overlay-content { width: min(100%, 650px); text-align: left; }
-.overlay-content h2 { margin-top: 0; }
-.answer-options { display: grid; gap: 10px; }
+
+.hidden {
+    display: none !important;
+}
+
+.overlay-content {
+    width: 100%;
+    max-width: 600px;
+}
+
+.answer-options {
+    display: grid;
+    gap: 10px;
+}
+
 .answer-button {
-  padding: 12px 14px;
-  border: 1px solid #64748b;
-  border-radius: 7px;
-  background: #1e293b;
-  color: #fff;
-  text-align: left;
-  font: inherit;
-  cursor: pointer;
+    padding: 12px;
+    background: #222;
+    border: 1px solid #777;
+    border-radius: 5px;
+    color: white;
+    text-align: left;
+    font-size: 15px;
+    cursor: pointer;
 }
-.answer-button:hover:not(:disabled) { background: #334155; }
-.answer-button:disabled { cursor: default; opacity: .8; }
-.feedback { min-height: 1.4em; font-weight: 700; }
-.feedback.correct { color: #86efac; }
-.feedback.incorrect { color: #fca5a5; }
-.teacher-panel h2 { margin-top: 0; }
-.choice-input-row { display: flex; gap: 10px; margin: 10px 0; }
-.choice-input-row input { flex: 1; }
-#question-form > .btn { margin-top: 14px; }
-@media (max-width: 620px) {
-  body { padding: 12px; }
-  .panel { padding: 14px; }
-  .url-row, .choice-input-row { flex-direction: column; align-items: stretch; }
-  .access-row label { white-space: normal; }
-  .url-row .btn { width: 100%; }
-  .overlay { padding: 12px; }
-  .answer-button { padding: 9px; }
+
+.answer-button:hover {
+    background: #444;
+}
+
+.answer-button:disabled {
+    opacity: 0.7;
+}
+
+.choice-input-row {
+    display: flex;
+    gap: 10px;
+    margin: 10px 0;
+}
+
+.choice-input-row input {
+    flex: 1;
+}
+
+@media (max-width: 600px) {
+    body {
+        padding: 10px;
+    }
+
+    .url-row, .choice-input-row {
+        flex-direction: column;
+    }
 }
