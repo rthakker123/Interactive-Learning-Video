@@ -31,10 +31,10 @@ db.serialize(() => {
         percentage INTEGER
     )`);
 
-    db.run(' CREATE TABLE IF NOT EXISTS videos (
+    db.run(`CREATE TABLE IF NOT EXISTS videos (
            accessCode TEXT PRIMARY KEY,
         videoURL TEXT
-    )');
+    )`);
 });
 
 // Get all questions for a specific acess code.
@@ -73,7 +73,7 @@ app.post('/videos/create', (req, res) => {
     const accessCode = crypto.randomBytes(3).toString('hex').toUpperCase();
 
     db.run{
-        'INSERT INTO videos (accessCode, videoUrl) VALUES (?, ?)',
+        `INSERT INTO videos (accessCode, videoUrl) VALUES (?, ?)`,
             [accessCode, videoUrl],
             function (err) {
                 if (err) {
