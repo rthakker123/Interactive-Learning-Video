@@ -11,70 +11,22 @@
     <main class="container">
         <h1>Interactive Learning Video</h1>
 
-        <section class="controls">
-            <label for="url-input">YouTube URL</label>
-            <div class="url-row">
-                <input type="text" id="url-input" placeholder="Paste a YouTube link">
-                <button id="load-url-button" class="btn">Load Video</button>
-            </div>
+        <div class="url-container">
+            <input type="text" id="url-input" placeholder="Paste a YouTube URL">
+            <button id="load-url-button" class="btn">Load Video</button>
+        </div>
 
-            <label for="access-code-input">Quiz Code</label>
-            <div class="url-row">
-                <input type="text" id="access-code-input" placeholder="Enter quiz code">
-                <button id="load-quiz-button" class="btn">Load Quiz</button>
-            </div>
-            <p id="status-message">Enter a video and quiz code.</p>
-        </section>
+        <div class="video-container">
+            <iframe
+                id="interactive-video"
+                src="https://www.youtube.com/embed/I2wURDqiXdM"
+                title="YouTube video player"
+                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                allowfullscreen>
+            </iframe>
+        </div>
 
-        <section class="video-section">
-            <div class="video-container">
-                <div id="interactive-video"></div>
-                <div id="interactive-overlay" class="overlay hidden">
-                    <div class="overlay-content">
-                        <h2 id="question-text">Question</h2>
-                        <div id="answer-options" class="answer-options"></div>
-                        <p id="answer-feedback"></p>
-                        <button id="continue-button" class="btn hidden">Continue Video</button>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <section class="teacher-section">
-            <h2>Add a Question</h2>
-            <p>Enter the time where the question should appear. Use seconds or mm:ss, like 90 or 1:30.</p>
-            <form id="question-form">
-                <label for="teacher-code">Quiz Code</label>
-                <input id="teacher-code" name="accessCode" required placeholder="Example: BIO101">
-
-                <label for="question-timestamp">Timestamp</label>
-                <input id="question-timestamp" name="timestamp" required placeholder="Example: 1:30">
-
-                <label for="teacher-question">Question</label>
-                <textarea id="teacher-question" name="question" required rows="3"></textarea>
-
-                <div class="choice-input-row">
-                    <input name="a" required placeholder="Choice A">
-                    <input name="b" required placeholder="Choice B">
-                </div>
-                <div class="choice-input-row">
-                    <input name="c" required placeholder="Choice C">
-                    <input name="d" required placeholder="Choice D">
-                </div>
-
-                <label for="correct-answer">Correct Answer</label>
-                <select id="correct-answer" name="correctAnswer" required>
-                    <option value="">Select an answer</option>
-                    <option value="a">A</option>
-                    <option value="b">B</option>
-                    <option value="c">C</option>
-                    <option value="d">D</option>
-                </select>
-
-                <button type="submit" class="btn">Save Question</button>
-                <p id="teacher-status"></p>
-            </form>
-        </section>
+        <p id="status-message"></p>
     </main>
 
     <script src="./resources/script.js"></script>
