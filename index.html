@@ -1,29 +1,81 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <link rel="icon" type="image/jpeg" href="./resources/favicon.jpg">
-    <link rel="stylesheet" href="./resources/styles.css">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Interactive Learning Video</title>
+    <link rel="icon" type="image/jpeg" href="./resources/favicon.jpg">
+    <link rel="stylesheet" href="./resources/styles.css">
 </head>
 <body>
     <main class="container">
-        <div class="video-container">
-            <iframe width="560" height="315" src="https://www.youtube.com/embed/I2wURDqiXdM?si=7iVmaTvOccvAYKfa" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
-            <div id="interactive-overlay" class="overlay hidden">
-                <div class="overlay-content">
-                    <h2 id="question-text" placeholder="Enter your question here..."> </h2>
+        <header class="page-header">
+            <h1>Interactive Learning Video</h1>
+            <p>Watch, pause, and answer questions as you learn.</p>
+        </header>
+
+        <section class="panel">
+            <label for="url-input">YouTube video URL</label>
+            <div class="url-row">
+                <input type="url" id="url-input" placeholder="Paste a YouTube link" autocomplete="url">
+                <button id="load-url-button" class="btn">Load video</button>
+            </div>
+            <div class="url-row access-row">
+                <label for="access-code-input">Quiz access code</label>
+                <input type="text" id="access-code-input" placeholder="Enter teacher's code">
+                <button id="load-quiz-button" class="btn secondary">Load quiz</button>
+            </div>
+            <p id="status-message" class="status" role="status">Load a video, then load its quiz.</p>
+        </section>
+
+        <section class="video-section">
+            <div class="video-container">
+                <div id="interactive-video"></div>
+                <div id="interactive-overlay" class="overlay hidden" role="dialog" aria-modal="true" aria-labelledby="question-text">
+                    <div class="overlay-content">
+                        <h2 id="question-text">Question</h2>
+                        <div id="answer-options" class="answer-options"></div>
+                        <p id="answer-feedback" class="feedback" aria-live="polite"></p>
+                        <button id="continue-button" class="btn hidden">Continue video</button>
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="url-container">
-            <input type="text" id="url-input" placeholder="Enter a URL">
-            <button id="load-url-button" class="btn">Load URL</button>
-        </div>
-        </main>
-  </main>
+        </section>
 
-  <script src="./resources/script.js"></script>
+        <section class="panel teacher-panel">
+            <h2>Teacher: Add a question</h2>
+            <p class="helper">Use the same access code students will enter. Timestamp can be seconds (90) or minutes:seconds (1:30).</p>
+            <form id="question-form">
+                <label for="teacher-code">Quiz access code</label>
+                <input id="teacher-code" name="accessCode" required placeholder="e.g. BIO101">
+
+                <label for="question-timestamp">Video timestamp</label>
+                <input id="question-timestamp" name="timestamp" required placeholder="e.g. 1:30 or 90">
+
+                <label for="teacher-question">Question</label>
+                <textarea id="teacher-question" name="question" required rows="3" placeholder="Write your question"></textarea>
+
+                <div class="choice-input-row">
+                    <input name="a" required placeholder="Choice A">
+                    <input name="b" required placeholder="Choice B">
+                </div>
+                <div class="choice-input-row">
+                    <input name="c" required placeholder="Choice C">
+                    <input name="d" required placeholder="Choice D">
+                </div>
+
+                <label for="correct-answer">Correct choice</label>
+                <select id="correct-answer" name="correctAnswer" required>
+                    <option value="">Choose correct answer</option>
+                    <option value="a">A</option><option value="b">B</option>
+                    <option value="c">C</option><option value="d">D</option>
+                </select>
+                <button type="submit" class="btn">Save question</button>
+                <p id="teacher-status" class="status" role="status"></p>
+            </form>
+        </section>
+    </main>
+
+    <script src="./resources/script.js"></script>
 </body>
 </html>
