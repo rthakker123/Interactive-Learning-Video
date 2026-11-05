@@ -9,51 +9,49 @@
 </head>
 <body>
     <main class="container">
-        <header class="page-header">
-            <h1>Interactive Learning Video</h1>
-            <p>Watch, pause, and answer questions as you learn.</p>
-        </header>
+        <h1>Interactive Learning Video</h1>
 
-        <section class="panel">
-            <label for="url-input">YouTube video URL</label>
+        <section class="controls">
+            <label for="url-input">YouTube URL</label>
             <div class="url-row">
-                <input type="url" id="url-input" placeholder="Paste a YouTube link" autocomplete="url">
-                <button id="load-url-button" class="btn">Load video</button>
+                <input type="text" id="url-input" placeholder="Paste a YouTube link">
+                <button id="load-url-button" class="btn">Load Video</button>
             </div>
-            <div class="url-row access-row">
-                <label for="access-code-input">Quiz access code</label>
-                <input type="text" id="access-code-input" placeholder="Enter teacher's code">
-                <button id="load-quiz-button" class="btn secondary">Load quiz</button>
+
+            <label for="access-code-input">Quiz Code</label>
+            <div class="url-row">
+                <input type="text" id="access-code-input" placeholder="Enter quiz code">
+                <button id="load-quiz-button" class="btn">Load Quiz</button>
             </div>
-            <p id="status-message" class="status" role="status">Load a video, then load its quiz.</p>
+            <p id="status-message">Enter a video and quiz code.</p>
         </section>
 
         <section class="video-section">
             <div class="video-container">
                 <div id="interactive-video"></div>
-                <div id="interactive-overlay" class="overlay hidden" role="dialog" aria-modal="true" aria-labelledby="question-text">
+                <div id="interactive-overlay" class="overlay hidden">
                     <div class="overlay-content">
                         <h2 id="question-text">Question</h2>
                         <div id="answer-options" class="answer-options"></div>
-                        <p id="answer-feedback" class="feedback" aria-live="polite"></p>
-                        <button id="continue-button" class="btn hidden">Continue video</button>
+                        <p id="answer-feedback"></p>
+                        <button id="continue-button" class="btn hidden">Continue Video</button>
                     </div>
                 </div>
             </div>
         </section>
 
-        <section class="panel teacher-panel">
-            <h2>Teacher: Add a question</h2>
-            <p class="helper">Use the same access code students will enter. Timestamp can be seconds (90) or minutes:seconds (1:30).</p>
+        <section class="teacher-section">
+            <h2>Add a Question</h2>
+            <p>Enter the time where the question should appear. Use seconds or mm:ss, like 90 or 1:30.</p>
             <form id="question-form">
-                <label for="teacher-code">Quiz access code</label>
-                <input id="teacher-code" name="accessCode" required placeholder="e.g. BIO101">
+                <label for="teacher-code">Quiz Code</label>
+                <input id="teacher-code" name="accessCode" required placeholder="Example: BIO101">
 
-                <label for="question-timestamp">Video timestamp</label>
-                <input id="question-timestamp" name="timestamp" required placeholder="e.g. 1:30 or 90">
+                <label for="question-timestamp">Timestamp</label>
+                <input id="question-timestamp" name="timestamp" required placeholder="Example: 1:30">
 
                 <label for="teacher-question">Question</label>
-                <textarea id="teacher-question" name="question" required rows="3" placeholder="Write your question"></textarea>
+                <textarea id="teacher-question" name="question" required rows="3"></textarea>
 
                 <div class="choice-input-row">
                     <input name="a" required placeholder="Choice A">
@@ -64,14 +62,17 @@
                     <input name="d" required placeholder="Choice D">
                 </div>
 
-                <label for="correct-answer">Correct choice</label>
+                <label for="correct-answer">Correct Answer</label>
                 <select id="correct-answer" name="correctAnswer" required>
-                    <option value="">Choose correct answer</option>
-                    <option value="a">A</option><option value="b">B</option>
-                    <option value="c">C</option><option value="d">D</option>
+                    <option value="">Select an answer</option>
+                    <option value="a">A</option>
+                    <option value="b">B</option>
+                    <option value="c">C</option>
+                    <option value="d">D</option>
                 </select>
-                <button type="submit" class="btn">Save question</button>
-                <p id="teacher-status" class="status" role="status"></p>
+
+                <button type="submit" class="btn">Save Question</button>
+                <p id="teacher-status"></p>
             </form>
         </section>
     </main>
