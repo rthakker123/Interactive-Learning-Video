@@ -85,6 +85,27 @@ app.post('/videos/create', (req, res) => {
         );
     });
 
+    // Get a video using its access code
+app.get('/videos/:accessCode', (req, res) => {
+    const accessCode = req.params.accessCode;
+
+    db.get(
+        `SELECT videoURL FROM videos WHERE accessCode = ?`,
+        [accessCode],
+        (err, row) => {
+            if (err) {
+                return res.status(500).json({ error: err.message });
+            }
+
+            if (!row) {
+                return res.status(404).json({ error: "Video not found." });
+            }
+
+            res.json({ videoUrl: row.videoURL });
+        }
+    );
+});
+
 
 // Start Server
 app.listen(3000, () => console.log("Server listening at http://localhost:3000"));
